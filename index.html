@@ -167,6 +167,15 @@
       left: 20px;
     }
 
+    /* Balance section */
+    #balance input {
+      padding: 5px;
+      margin: 10px;
+    }
+    #balance button {
+      margin-top: 10px;
+    }
+
     @media (max-width: 768px) {
       .footer-middle {
         flex-direction: column;
@@ -175,6 +184,38 @@
         gap: 30px;
       }
     }
+
+    input{
+      border-radius: 10px;
+      position: relative;
+      top: 5px;
+    }
+
+    input::placeholder{
+      padding: 20px;
+    }
+
+    #balance{
+      text-align: left;
+      position: relative;
+      bottom: 4400px;
+      left: 700px;
+      box-shadow: 0 0 50px white;
+      padding: 50px;
+      width: 400px;
+      border-radius: 10%;
+      height: 300px;
+      font-size: 10px;
+    }
+
+    #result{
+      font-size: 15px;
+    }
+
+    #result5{
+      font-size: 15px;
+    }
+
   </style>
 </head>
 <body>
@@ -200,6 +241,7 @@
   <section class="hero-section">
     <h1>Hoo Bank</h1>
     <h2>Landing page for an international bank</h2>
+    <br>
     <p>
       This project involves developing a web application using HTML for structuring
       content, CSS for styling, and JavaScript for interactive functionality, creating
@@ -238,12 +280,10 @@
 
   <!-- Footer Section -->
   <footer class="footer-section">
-    <!-- First Paragraph -->
     <p class="fs-4">
       The final outcome is a cutting-edge React JS application that seamlessly integrates HTML, Tailwind CSS, and JavaScript to deliver a visually stunning and user-friendly landing page. The use of gradients, business stats, testimonials, and strategically placed call-to-action buttons optimizes user engagement.
     </p>
 
-    <!-- Second Paragraph + Links -->
     <div class="footer-middle">
       <p class="fs-4 flex-grow-1">
         Excelling in fast-paced environments and always being eager to tackle new challenges, let's team up and leverage technology to solve problems.
@@ -269,12 +309,51 @@
       </div>
     </div>
 
-    <!-- Bottom Left -->
+    <!-- Balance Section -->
+     <div id="balance" class="container-fluid">
+      <h4>Current Balance</h4>
+     <p id="result"></p>
+     <p id="result5">Last Credit Amount</p>
+     <p id="result1"></p>
+      <p id="result5">Add Credit To Your Balance</p>
+      <input type="number" id="balanceInput" placeholder="Enter amount">
+      <button id="updateBalance" class="btn btn-primary btn-sm">Update Balance</button>
+      <br><br>
+      
+    </div>
+
+    <!-- Footer secton -->
     <div class="footer-bottom">
       Ahnaf Abid Islam
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  let button = document.getElementById("updateBalance");
+  let input = document.getElementById("balanceInput");
+  let result = document.getElementById("result");
+  let lastCredit = document.getElementById("result1"); // For last credit amount
+
+  let balance = 100;
+  result.innerText = "Your Balance: $" + balance;
+  result.style.color = "#0d6efd";
+
+  button.onclick = function () {
+    let amount = parseFloat(input.value);
+    if (isNaN(amount)) {
+      result.innerText = "Please enter a valid amount!";
+      result.style.color = "red";
+    } else {
+      balance += amount;
+      result.innerText = "Your Balance: $" + balance;
+      lastCredit.innerText = "Last Credit Amount: $" + amount; // show only the last amount
+      lastCredit.style.color = "#0d6efd";
+      input.value = ""; 
+    }
+  };
+</script>
+
+
 </body>
 </html>
